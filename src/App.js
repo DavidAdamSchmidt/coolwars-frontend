@@ -9,7 +9,8 @@ const App = () => {
     let result;
 
     try {
-      result = eval(userCode);
+      // eslint-disable-next-line no-new-func
+      result = Function(`"use strict";return (${userCode})`)();
     } catch (e) {
       result = `ERROR: ${e.message}`;
     }
