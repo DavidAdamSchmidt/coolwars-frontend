@@ -23,7 +23,7 @@ const CodeBox = () => {
   const [dojos, setDojos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedDojo, setSelectedDojo] = useState("");
-  const [resultCode, setResultCode] = useState("");
+  const [result, setResult] = useState({});
 
   useEffect(() => {
     Axios.get(`${API_URL}/dojo`)
@@ -40,8 +40,23 @@ const CodeBox = () => {
   }, []);
 
   useEffect(() => {
-    setResultCode("");
+    setResult("");
   }, [selectedDojo]);
+
+  const verifySolution = solution => {
+    Axios.post(`${API_URL}/verify`, {
+      dojoId: selectedDojo.id,
+      solution: solution
+    })
+      .then(response => {
+        if (response.data === true || response.data === false) {
+          setResult({ ...result, valid: response.data });
+        }
+      })
+      .catch(error => {
+        console.log(`Error: ${error}`);
+      });
+  };
 
   const handleSelect = id => {
     setSelectedDojo(dojos.find(dojo => dojo.id === parseInt(id)));
@@ -52,12 +67,13 @@ const CodeBox = () => {
 
     try {
       // eslint-disable-next-line no-new-func
-      result = eval(userCode);
+      result = `${eval(userCode)}`;
     } catch (e) {
       result = `ERROR: ${e.message}`;
     }
 
-    setResultCode(result === undefined ? "undefined" : result);
+    setResult({ code: result, valid: null });
+    verifySolution(result);
   };
 
   if (loading) {
@@ -95,7 +111,7 @@ const CodeBox = () => {
             textAreaStyle={textAreaStyle}
           />
         )}
-        {resultCode && <Result resultCode={resultCode} style={textAreaStyle} />}
+        {result && <Result result={result} style={textAreaStyle} />}
       </div>
     </div>
   );
