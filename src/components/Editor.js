@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AceEditor from "react-ace";
 
 import "ace-builds/src-noconflict/mode-javascript";
-import "ace-builds/src-noconflict/theme-pastel_on_dark";
+import "ace-builds/src-noconflict/theme-tomorrow";
 
 
 const Editor = ({ starterCode, handleCompile, buttonStyle }) => {
@@ -16,11 +16,9 @@ const Editor = ({ starterCode, handleCompile, buttonStyle }) => {
     <div>
         <AceEditor
             mode="javascript"
-            theme="pastel_on_dark"
+            theme="tomorrow"
             onChange={code => setUserCode(code)}
             value={userCode}
-            enableSnippets = {true}
-            enableBasicAutocompletion = {true}
             name="UNIQUE_ID_OF_DIV"
             editorProps={{ $blockScrolling: true }}
         />
