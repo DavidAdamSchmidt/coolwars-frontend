@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const Editor = ({ handleCompile }) => {
+const Editor = ({ starterCode, handleCompile, textAreaStyle, buttonStyle }) => {
   const [userCode, setUserCode] = useState("");
+
+  useEffect(() => {
+    setUserCode(starterCode);
+  }, [starterCode]);
 
   return (
     <div>
       <textarea
-        style={{ width: 200, height: 200 }}
+        value={userCode}
+        style={{ ...textAreaStyle, height: 200 }}
         onChange={e => setUserCode(e.target.value)}
       />
-      <div>
+      <div style={buttonStyle}>
         <button onClick={() => handleCompile(userCode)}>Compile</button>
       </div>
     </div>

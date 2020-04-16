@@ -1,10 +1,10 @@
 import React from "react";
 
-const Result = ({ resultCode }) => {
+const Result = ({ resultCode, style }) => {
   return (
     <div>
       <textarea
-        style={{ width: 200, height: 100 }}
+        style={{ ...style, height: 50, outline: "none" }}
         value={resultCode}
         readOnly
       />
