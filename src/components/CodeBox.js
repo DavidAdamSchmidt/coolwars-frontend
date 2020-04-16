@@ -22,7 +22,7 @@ const controllerStyle = {
 const CodeBox = () => {
   const [dojos, setDojos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [starterCode, setStarterCode] = useState("");
+  const [selectedDojo, setSelectedDojo] = useState("");
   const [resultCode, setResultCode] = useState("");
 
   useEffect(() => {
@@ -39,8 +39,12 @@ const CodeBox = () => {
       });
   }, []);
 
+  useEffect(() => {
+    setResultCode("");
+  }, [selectedDojo]);
+
   const handleSelect = id => {
-    setStarterCode(dojos.find(dojo => dojo.id === parseInt(id)).starterCode);
+    setSelectedDojo(dojos.find(dojo => dojo.id === parseInt(id)));
   };
 
   const handleCompile = userCode => {
@@ -48,7 +52,7 @@ const CodeBox = () => {
 
     try {
       // eslint-disable-next-line no-new-func
-      result = Function(`"use strict";return (${userCode})`)();
+      result = eval(userCode);
     } catch (e) {
       result = `ERROR: ${e.message}`;
     }
@@ -61,17 +65,38 @@ const CodeBox = () => {
   }
 
   return (
-    <div style={{ maxWidth: "500px", margin: "auto" }}>
-      <Selector dojos={dojos} handleSelect={handleSelect} />
-      {starterCode && (
-        <Editor
-          starterCode={starterCode}
-          handleCompile={handleCompile}
-          buttonStyle={controllerStyle}
-          textAreaStyle={textAreaStyle}
+    <div style={{ maxWidth: "1000px", display: "flex", margin: "auto" }}>
+      <div
+        style={{
+          margin: 20,
+          padding: "0 20px",
+          width: 400,
+          boxSizing: "border-box"
+        }}
+      >
+        {selectedDojo && (
+          <>
+            <h1>{selectedDojo.title}</h1>
+            <span>{selectedDojo.description}</span>
+          </>
+        )}
+      </div>
+      <div style={{ width: 600 }}>
+        <Selector
+          dojos={dojos}
+          handleSelect={handleSelect}
+          style={controllerStyle}
         />
-      )}
-      {resultCode && <Result resultCode={resultCode} style={textAreaStyle} />}
+        {selectedDojo && (
+          <Editor
+            starterCode={selectedDojo.starterCode}
+            handleCompile={handleCompile}
+            buttonStyle={controllerStyle}
+            textAreaStyle={textAreaStyle}
+          />
+        )}
+        {resultCode && <Result resultCode={resultCode} style={textAreaStyle} />}
+      </div>
     </div>
   );
 };

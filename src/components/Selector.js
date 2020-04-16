@@ -12,7 +12,7 @@ const Selector = ({ dojos, handleSelect, style }) => {
         </option>
         {dojos.map(dojo => (
           <option key={dojo.id} value={dojo.id}>
-            {dojo.id}
+            {dojo.title}
           </option>
         ))}
       </select>
