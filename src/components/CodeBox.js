@@ -3,7 +3,7 @@ import Axios from "axios";
 import Editor from "./Editor";
 import Result from "./Result";
 import Selector from "./Selector";
-import { API_URL } from "./../constants";
+import { API_URL } from "../constants";
 
 const textAreaStyle = {
   display: "block",
@@ -66,7 +66,7 @@ const CodeBox = () => {
     let result;
 
     try {
-      // eslint-disable-next-line no-new-func
+      // eslint-disable-next-line no-eval
       result = `${eval(userCode)}`;
     } catch (e) {
       result = `ERROR: ${e.message}`;
@@ -108,7 +108,6 @@ const CodeBox = () => {
             starterCode={selectedDojo.starterCode}
             handleCompile={handleCompile}
             buttonStyle={controllerStyle}
-            textAreaStyle={textAreaStyle}
           />
         )}
         {result && <Result result={result} style={textAreaStyle} />}

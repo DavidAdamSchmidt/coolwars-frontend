@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AceEditor from "react-ace";
-
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-tomorrow";
-
 
 const Editor = ({ starterCode, handleCompile, buttonStyle }) => {
   const [userCode, setUserCode] = useState("");
@@ -14,15 +12,14 @@ const Editor = ({ starterCode, handleCompile, buttonStyle }) => {
 
   return (
     <div>
-        <AceEditor
-            mode="javascript"
-            theme="tomorrow"
-            onChange={code => setUserCode(code)}
-            value={userCode}
-            name="UNIQUE_ID_OF_DIV"
-            editorProps={{ $blockScrolling: true }}
-        />
-
+      <AceEditor
+        mode="javascript"
+        theme="tomorrow"
+        onChange={code => setUserCode(code)}
+        value={userCode}
+        name="UNIQUE_ID_OF_DIV"
+        editorProps={{ $blockScrolling: true }}
+      />
       <div style={buttonStyle}>
         <button onClick={() => handleCompile(userCode)}>Compile</button>
       </div>
