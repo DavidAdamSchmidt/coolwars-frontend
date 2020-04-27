@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import Axios from "axios";
+import Description from "./Description";
 import Editor from "./Editor";
 import Result from "./Result";
 import { API_URL } from "../../../constants";
 
-const textAreaStyle = {
-  display: "block",
-  margin: "auto",
-  boxSizing: "border-box",
-  width: "100%",
-  resize: "none"
-};
-
-const controllerStyle = {
-  display: "flex",
-  justifyContent: "center",
-  margin: 20
-};
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: 42% auto;
+  margin: 50px 5%;
+`;
 
 const CodeBox = ({ dojo }) => {
   const [result, setResult] = useState({});
@@ -55,33 +49,13 @@ const CodeBox = ({ dojo }) => {
   };
 
   return (
-    <div style={{ maxWidth: "1000px", display: "flex", margin: "auto" }}>
-      <div
-        style={{
-          margin: 20,
-          padding: "0 20px",
-          width: 400,
-          boxSizing: "border-box"
-        }}
-      >
-        {dojo && (
-          <>
-            <h1>{dojo.title}</h1>
-            <span>{dojo.description}</span>
-          </>
-        )}
+    <Wrapper>
+      <Description title={dojo.title} description={dojo.description} />
+      <div>
+        <Editor starterCode={dojo.starterCode} handleCompile={handleCompile} />
+        {result && <Result result={result} />}
       </div>
-      <div style={{ width: 600 }}>
-        {dojo && (
-          <Editor
-            starterCode={dojo.starterCode}
-            handleCompile={handleCompile}
-            buttonStyle={controllerStyle}
-          />
-        )}
-        {result && <Result result={result} style={textAreaStyle} />}
-      </div>
-    </div>
+    </Wrapper>
   );
 };
 

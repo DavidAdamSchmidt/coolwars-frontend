@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import { Redirect } from "react-router-dom";
 import Axios from "axios";
 import Selector from "./Selector";
 import { API_URL } from "../../../constants";
 
-const controllerStyle = {
-  display: "flex",
-  justifyContent: "center",
-  margin: 20
-};
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+`;
 
 const HomePage = () => {
   const [dojos, setDojos] = useState([]);
@@ -30,7 +31,7 @@ const HomePage = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   if (selectedDojoId != null) {
@@ -38,11 +39,9 @@ const HomePage = () => {
   }
 
   return (
-    <Selector
-      dojos={dojos}
-      handleSelect={id => setSelectedDojoId(id)}
-      style={controllerStyle}
-    />
+    <Wrapper>
+      <Selector dojos={dojos} handleSelect={id => setSelectedDojoId(id)} />
+    </Wrapper>
   );
 };
 
