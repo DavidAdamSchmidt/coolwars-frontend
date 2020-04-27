@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Redirect } from "react-router-dom";
 import Axios from "axios";
+import Header from "./Header";
 import Selector from "./Selector";
 import { API_URL } from "../../../constants";
 
-const Wrapper = styled.div`
+const Content = styled.div`
   display: flex;
   justify-content: center;
-  margin: 20px;
+  margin-top: 20px;
 `;
 
 const HomePage = () => {
@@ -39,9 +40,12 @@ const HomePage = () => {
   }
 
   return (
-    <Wrapper>
-      <Selector dojos={dojos} handleSelect={id => setSelectedDojoId(id)} />
-    </Wrapper>
+    <div>
+      <Header />
+      <Content>
+        <Selector dojos={dojos} handleSelect={id => setSelectedDojoId(id)} />
+      </Content>
+    </div>
   );
 };
 
