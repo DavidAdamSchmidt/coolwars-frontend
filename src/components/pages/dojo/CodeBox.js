@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import Editor from "./Editor";
 import Result from "./Result";
-import Selector from "./Selector";
-import { API_URL } from "../constants";
+import { API_URL } from "../../../constants";
 
 const textAreaStyle = {
   display: "block",
@@ -19,33 +18,16 @@ const controllerStyle = {
   margin: 20
 };
 
-const CodeBox = () => {
-  const [dojos, setDojos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedDojo, setSelectedDojo] = useState("");
+const CodeBox = ({ dojo }) => {
   const [result, setResult] = useState({});
 
   useEffect(() => {
-    Axios.get(`${API_URL}/dojo`)
-      .then(response => {
-        if (response.status === 200) {
-          setDojos(response.data);
-        }
-        setLoading(false);
-      })
-      .catch(error => {
-        console.log(`Error: ${error}`);
-        setLoading(false);
-      });
-  }, []);
-
-  useEffect(() => {
     setResult("");
-  }, [selectedDojo]);
+  }, [dojo]);
 
   const verifySolution = solution => {
     Axios.post(`${API_URL}/verify`, {
-      dojoId: selectedDojo.id,
+      dojoId: dojo.id,
       solution: solution
     })
       .then(response => {
@@ -56,10 +38,6 @@ const CodeBox = () => {
       .catch(error => {
         console.log(`Error: ${error}`);
       });
-  };
-
-  const handleSelect = id => {
-    setSelectedDojo(dojos.find(dojo => dojo.id === parseInt(id)));
   };
 
   const handleCompile = userCode => {
@@ -76,10 +54,6 @@ const CodeBox = () => {
     verifySolution(result);
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div style={{ maxWidth: "1000px", display: "flex", margin: "auto" }}>
       <div
@@ -90,22 +64,17 @@ const CodeBox = () => {
           boxSizing: "border-box"
         }}
       >
-        {selectedDojo && (
+        {dojo && (
           <>
-            <h1>{selectedDojo.title}</h1>
-            <span>{selectedDojo.description}</span>
+            <h1>{dojo.title}</h1>
+            <span>{dojo.description}</span>
           </>
         )}
       </div>
       <div style={{ width: 600 }}>
-        <Selector
-          dojos={dojos}
-          handleSelect={handleSelect}
-          style={controllerStyle}
-        />
-        {selectedDojo && (
+        {dojo && (
           <Editor
-            starterCode={selectedDojo.starterCode}
+            starterCode={dojo.starterCode}
             handleCompile={handleCompile}
             buttonStyle={controllerStyle}
           />

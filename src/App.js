@@ -1,8 +1,8 @@
 import React from "react";
-import CodeBox from "./components/CodeBox";
+import Router from "./Router";
 
 const App = () => {
-  return <CodeBox />;
+  return <Router />;
 };
 
 export default App;
