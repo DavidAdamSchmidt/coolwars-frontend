@@ -8,6 +8,7 @@ import * as serviceWorker from "./serviceWorker";
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
+    font-family: boxed, "helvetica neue", Helvetica, Roboto, Arial, sans-serif;
   }
 `;
 
