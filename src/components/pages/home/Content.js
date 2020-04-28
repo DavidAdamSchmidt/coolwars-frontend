@@ -11,7 +11,6 @@ const Message = styled.div`
   text-align: center;
   font-size: 24px;
   font-weight: bold;
-  color: darkblue;
 `;
 
 const Wrapper = styled.div`
