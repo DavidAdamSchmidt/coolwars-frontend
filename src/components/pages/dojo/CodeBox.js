@@ -4,14 +4,14 @@ import Axios from "axios";
 import Description from "./Description";
 import Editor from "./Editor";
 import Result from "./Result";
-import { API_URL } from "../../../constants";
+import { API_URL, QUERIES } from "../../../constants";
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 40px 5%;
+  margin: 40px 5% 100px 5%;
 
-  @media (min-width: 768px) {
+  @media (${QUERIES.MEDIUM}) {
     display: grid;
     grid-template-columns: 42% auto;
     margin: 80px 5%;

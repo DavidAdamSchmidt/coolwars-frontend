@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 const Container = styled.footer`
   position: fixed;
   bottom: 0;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;

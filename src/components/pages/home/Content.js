@@ -2,15 +2,24 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Redirect } from "react-router-dom";
 import Selector from "./Selector";
+import { QUERIES } from "../../../constants";
 
 const Container = styled.div`
-  margin: 60px;
+  margin: 40px;
+
+  @media (${QUERIES.MEDIUM}) {
+    margin: 60px;
+  }
 `;
 
 const Message = styled.div`
   text-align: center;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
+
+  @media (${QUERIES.MEDIUM}) {
+    font-size: 24px;
+  }
 `;
 
 const Wrapper = styled.div`
