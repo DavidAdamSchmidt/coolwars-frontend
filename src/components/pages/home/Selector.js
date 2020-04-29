@@ -6,6 +6,7 @@ const Wrapper = styled.div`
   width: 100%;
   max-width: 340px;
   padding: 20px;
+  color: #1d1e22;
 `;
 
 const createOptions = dojos =>

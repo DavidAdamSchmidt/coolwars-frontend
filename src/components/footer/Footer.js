@@ -14,7 +14,7 @@ const Container = styled.footer`
   justify-content: center;
   width: 100%;
   height: 70px;
-  background: #202020;
+  background: ${({ theme }) => theme.footerBackground};
 `;
 
 const BackToHome = styled(Link)`

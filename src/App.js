@@ -1,13 +1,15 @@
 import React from "react";
+import Layout from "./Layout";
 import Router from "./Router";
-import Footer from "./components/footer/Footer";
+import ThemeProvider from "./contexts/ThemeContext";
 
 const App = () => {
   return (
-    <>
-      <Router />
-      <Footer />
-    </>
+    <ThemeProvider>
+      <Layout>
+        <Router />
+      </Layout>
+    </ThemeProvider>
   );
 };
 

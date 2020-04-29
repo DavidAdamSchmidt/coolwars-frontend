@@ -3,6 +3,8 @@ import styled from "styled-components";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-tomorrow";
+import "ace-builds/src-noconflict/theme-tomorrow_night_bright";
+import { useThemeContext } from "../../../contexts/ThemeContext";
 
 const ButtonWrapper = styled.div`
   display: flex;
@@ -12,6 +14,7 @@ const ButtonWrapper = styled.div`
 
 const Editor = ({ starterCode, handleCompile }) => {
   const [userCode, setUserCode] = useState("");
+  const { isDarkMode } = useThemeContext();
 
   useEffect(() => {
     setUserCode(starterCode);
@@ -21,7 +24,7 @@ const Editor = ({ starterCode, handleCompile }) => {
     <div>
       <AceEditor
         mode="javascript"
-        theme="tomorrow"
+        theme={isDarkMode ? "tomorrow_night_bright" : "tomorrow"}
         onChange={code => setUserCode(code)}
         value={userCode}
         name="UNIQUE_ID_OF_DIV"
