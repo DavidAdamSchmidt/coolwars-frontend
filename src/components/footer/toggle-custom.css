@@ -1,0 +1,11 @@
+.react-toggle--checked .react-toggle-track {
+  background-color: silver;
+}
+
+.react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
+  background-color: white;
+}
+
+.react-toggle--checked .react-toggle-thumb {
+  border-color: silver;
+}

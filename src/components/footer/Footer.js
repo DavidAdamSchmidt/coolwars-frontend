@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
+import DarkModeToggle from "./DarkModeToggle";
 
 const Container = styled.footer`
   position: fixed;
   bottom: 0;
   z-index: 10;
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 50px;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -29,6 +32,7 @@ const Footer = () => {
       {useLocation().pathname !== "/" && (
         <BackToHome to="/">Back to Home</BackToHome>
       )}
+      <DarkModeToggle />
     </Container>
   );
 };
