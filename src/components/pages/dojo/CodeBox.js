@@ -7,9 +7,15 @@ import Result from "./Result";
 import { API_URL } from "../../../constants";
 
 const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 42% auto;
-  margin: 50px 5%;
+  display: flex;
+  flex-direction: column;
+  margin: 40px 5%;
+
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 42% auto;
+    margin: 80px 5%;
+  }
 `;
 
 const CodeBox = ({ dojo }) => {
