@@ -13,14 +13,28 @@ const ButtonWrapper = styled.div`
   margin: 20px;
 `;
 
+const initialStyle = {
+  width: "100%",
+  fontSize: 16
+};
+
 const Editor = ({ starterCode, handleCompile }) => {
   const [userCode, setUserCode] = useState("");
-  const { tabSize } = useDojoContext();
+  const [style, setStyle] = useState(initialStyle);
+  const { tabSize, fullScreen } = useDojoContext();
   const { isDarkMode } = useThemeContext();
 
   useEffect(() => {
     setUserCode(starterCode);
   }, [starterCode]);
+
+  useEffect(() => {
+    setStyle(prev =>
+      fullScreen
+        ? { ...prev, height: `${window.innerHeight - 300}px` }
+        : initialStyle
+    );
+  }, [fullScreen]);
 
   return (
     <div>
@@ -31,7 +45,7 @@ const Editor = ({ starterCode, handleCompile }) => {
         value={userCode}
         name="UNIQUE_ID_OF_DIV"
         editorProps={{ $blockScrolling: true }}
-        style={{ width: "100%", fontSize: 16 }}
+        style={style}
         tabSize={tabSize}
       />
       <ButtonWrapper>

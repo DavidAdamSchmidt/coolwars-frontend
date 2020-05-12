@@ -19,10 +19,11 @@ const Title = styled.h1`
 
 const Description = () => {
   const {
-    dojo: { title, description }
+    dojo: { title, description },
+    fullScreen
   } = useDojoContext();
 
-  return (
+  return fullScreen ? null : (
     <Wrapper>
       <Title>{title}</Title>
       <span>{description}</span>
