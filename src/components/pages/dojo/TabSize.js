@@ -50,9 +50,8 @@ const TabSize = () => {
       Tab Spaces:
       {[2, 4, 8].map(size => (
         <Size
+          key={size}
           selected={size === tabSize}
-          color={size === tabSize ? "white" : "black"}
-          background={size === tabSize ? "darkgreen" : "white"}
           onClick={() => setTabSize(size)}
         >
           {size}

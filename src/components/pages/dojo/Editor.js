@@ -26,13 +26,15 @@ const Editor = ({ handleCompile }) => {
 
   useEffect(() => setUserCode(dojo.starterCode), [dojo]);
 
-  useEffect(() => {
-    setStyle(prev =>
-      fullScreen
-        ? { ...prev, height: `${window.innerHeight - 300}px` }
-        : initialStyle
-    );
-  }, [fullScreen]);
+  useEffect(
+    () =>
+      setStyle(prev =>
+        fullScreen
+          ? { ...prev, height: `${window.innerHeight - 300}px` }
+          : initialStyle
+      ),
+    [fullScreen]
+  );
 
   return (
     <div>

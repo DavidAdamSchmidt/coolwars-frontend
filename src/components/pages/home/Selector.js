@@ -17,9 +17,7 @@ const createOptions = dojos =>
 const Selector = ({ dojos, handleSelect }) => {
   const [options, setOptions] = useState(createOptions(dojos));
 
-  useEffect(() => {
-    setOptions(createOptions(dojos));
-  }, [dojos]);
+  useEffect(() => setOptions(createOptions(dojos)), [dojos]);
 
   return (
     <Wrapper>
