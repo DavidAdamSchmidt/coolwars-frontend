@@ -9,14 +9,14 @@ const lightTheme = {
   background: "white",
   color: "#1d1e22",
   footerBackground: "#202020",
-  editor: "tomorrow"
+  tabSizeBackground: "#f3f3f3"
 };
 
 const darkTheme = {
   background: "#1d1e22",
   color: "white",
   footerBackground: "black",
-  editor: "tomorrow"
+  tabSizeBackground: "#313d4b"
 };
 
 const ThemeProvider = ({ children }) => {

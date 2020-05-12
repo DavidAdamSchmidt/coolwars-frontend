@@ -4,6 +4,7 @@ import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-tomorrow";
 import "ace-builds/src-noconflict/theme-tomorrow_night_bright";
+import { useDojoContext } from "../../../contexts/DojoContext";
 import { useThemeContext } from "../../../contexts/ThemeContext";
 
 const ButtonWrapper = styled.div`
@@ -14,6 +15,7 @@ const ButtonWrapper = styled.div`
 
 const Editor = ({ starterCode, handleCompile }) => {
   const [userCode, setUserCode] = useState("");
+  const { tabSize } = useDojoContext();
   const { isDarkMode } = useThemeContext();
 
   useEffect(() => {
@@ -30,6 +32,7 @@ const Editor = ({ starterCode, handleCompile }) => {
         name="UNIQUE_ID_OF_DIV"
         editorProps={{ $blockScrolling: true }}
         style={{ width: "100%", fontSize: 16 }}
+        tabSize={tabSize}
       />
       <ButtonWrapper>
         <button onClick={() => handleCompile(userCode)}>Compile</button>

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useDojoContext } from "../../../contexts/DojoContext";
 import { QUERIES } from "../../../constants";
 
 const Wrapper = styled.div`
@@ -16,7 +17,11 @@ const Title = styled.h1`
   margin-top: 0;
 `;
 
-const Description = ({ title, description }) => {
+const Description = () => {
+  const {
+    dojo: { title, description }
+  } = useDojoContext();
+
   return (
     <Wrapper>
       <Title>{title}</Title>
