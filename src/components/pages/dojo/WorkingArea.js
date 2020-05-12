@@ -8,13 +8,11 @@ import { API_URL } from "../../../constants";
 
 const WorkingArea = () => {
   const [result, setResult] = useState(null);
-  const {
-    dojo: { id, starterCode }
-  } = useDojoContext();
+  const { dojo } = useDojoContext();
 
   const verifySolution = solution => {
     Axios.post(`${API_URL}/verify`, {
-      dojoId: id,
+      dojoId: dojo.id,
       solution: solution
     })
       .then(response => {
@@ -44,7 +42,7 @@ const WorkingArea = () => {
   return (
     <div>
       <Options />
-      <Editor starterCode={starterCode} handleCompile={handleCompile} />
+      <Editor handleCompile={handleCompile} />
       {result && <Result result={result} />}
     </div>
   );

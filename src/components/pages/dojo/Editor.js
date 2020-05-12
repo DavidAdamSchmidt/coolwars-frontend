@@ -18,15 +18,13 @@ const initialStyle = {
   fontSize: 16
 };
 
-const Editor = ({ starterCode, handleCompile }) => {
+const Editor = ({ handleCompile }) => {
   const [userCode, setUserCode] = useState("");
   const [style, setStyle] = useState(initialStyle);
-  const { tabSize, fullScreen } = useDojoContext();
+  const { dojo, tabSize, fullScreen } = useDojoContext();
   const { isDarkMode } = useThemeContext();
 
-  useEffect(() => {
-    setUserCode(starterCode);
-  }, [starterCode]);
+  useEffect(() => setUserCode(dojo.starterCode), [dojo]);
 
   useEffect(() => {
     setStyle(prev =>
