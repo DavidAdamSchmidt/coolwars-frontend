@@ -21,6 +21,10 @@ const Container = styled.span`
           top: -35px;
           left: 20px;
         `}
+
+  &:hover {
+    visibility: hidden;
+  }
 `;
 
 const Tooltip = ({ text }) => {
