@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import Content from "./Content";
 import Header from "./Header";
+import Spinner from "../../shared/Spinner";
 import { API_URL } from "../../../constants";
 
 const HomePage = () => {
@@ -22,11 +23,9 @@ const HomePage = () => {
       });
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  return (
+  return loading ? (
+    <Spinner marginTop={"100px"} />
+  ) : (
     <div>
       <Header />
       <Content dojos={dojos} />
