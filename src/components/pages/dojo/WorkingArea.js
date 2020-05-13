@@ -1,18 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import styled from "styled-components";
 import { useDojoContext } from "../../../contexts/DojoContext";
 import Editor from "./Editor";
 import Options from "./Options";
-import Result from "./Result";
-import Spinner from "../../shared/Spinner";
+import Output from "./Output";
 import { API_URL } from "../../../constants";
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+`;
+
+const BottomWrapper = styled.div`
+  margin-top: 30px;
+`;
+
 const WorkingArea = () => {
+  const [userCode, setUserCode] = useState("");
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const { dojo } = useDojoContext();
 
-  const handleCompile = userCode => {
+  useEffect(() => setUserCode(dojo.starterCode), [dojo]);
+
+  const handleCodeChange = newCode => {
+    setUserCode(newCode);
+
+    if (result) {
+      setResult(null);
+    }
+  };
+
+  const handleCompile = () => {
     setLoading(true);
     Axios.post(`${API_URL}/verify`, {
       dojoId: dojo.id,
@@ -34,9 +55,21 @@ const WorkingArea = () => {
   return (
     <div>
       <Options />
-      <Editor handleCompile={handleCompile} freeze={loading} />
-      {loading && <Spinner />}
-      {result && <Result result={result} />}
+      <Editor
+        userCode={userCode}
+        freeze={loading}
+        handleCompile={handleCompile}
+        handleChange={handleCodeChange}
+      />
+      <BottomWrapper>
+        {loading || result ? (
+          <Output loading={loading} result={result} />
+        ) : (
+          <ButtonWrapper>
+            <button onClick={() => handleCompile(userCode)}>Compile</button>
+          </ButtonWrapper>
+        )}
+      </BottomWrapper>
     </div>
   );
 };

@@ -1,13 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
-  margin-top: 30px;
-`;
-
-const Output = styled.textarea`
+const Message = styled.textarea`
   display: block;
-  margin: auto;
+  margin: auto auto;
   box-sizing: border-box;
   width: 100%;
   max-width: 500px;
@@ -18,25 +14,15 @@ const Output = styled.textarea`
   color: ${({ color }) => color};
 `;
 
-const Message = styled.div`
-  margin: 20px;
-  font-size: 18px;
-  text-align: center;
-  color: ${({ color }) => color};
-`;
-
 const Result = ({ result }) => {
   const color = result.valid ? "green" : "red";
 
   return (
-    <Wrapper>
-      <Output value={result.code} readOnly color={color} />
-      {result && result.valid !== null && (
-        <Message color={color}>
-          {result.valid ? "Valid solution!" : "Invalid solution :("}
-        </Message>
-      )}
-    </Wrapper>
+    <Message
+      value={`${result?.valid ? "Valid" : "Invalid"} solution: ${result.code}`}
+      readOnly
+      color={color}
+    />
   );
 };
 
