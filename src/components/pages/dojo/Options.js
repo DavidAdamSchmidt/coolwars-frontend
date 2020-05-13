@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -42,6 +42,28 @@ const Options = () => {
   const [showTabSize, setShowTabSize] = useState(false);
   const { fullScreen, setFullScreen, setDojo } = useDojoContext();
 
+  const tabSizeRef = useRef(null);
+  const tabSizeIconRef = useRef(null);
+
+  const onMouseDown = useCallback(
+    e => {
+      if (
+        showTabSize &&
+        !tabSizeRef.current.contains(e.target) &&
+        !tabSizeIconRef.current.contains(e.target)
+      ) {
+        setShowTabSize(false);
+      }
+    },
+    [showTabSize, tabSizeRef, tabSizeIconRef]
+  );
+
+  useEffect(() => {
+    document.addEventListener("mousedown", onMouseDown);
+
+    return () => document.removeEventListener("mousedown", onMouseDown);
+  }, [onMouseDown]);
+
   const resetDojo = () =>
     setDojo(prev => {
       return { ...prev };
@@ -53,9 +75,19 @@ const Options = () => {
         <FontAwesomeIcon icon={faUndo} size={"lg"} color={"gray"} />
         <Tooltip text="Reset Code" />
       </IconWrapper>
-      <IconWrapper onClick={() => setShowTabSize(prev => !prev)}>
+      <IconWrapper
+        ref={tabSizeIconRef}
+        onClick={() => setShowTabSize(prev => !prev)}
+      >
         <FontAwesomeIcon icon={faCog} size={"lg"} color={"gray"} />
-        {showTabSize ? <TabSize /> : <Tooltip text="Tab Spaces" />}
+        {showTabSize ? (
+          <TabSize
+            ref={tabSizeRef}
+            handleClose={() => setShowTabSize(prev => !prev)}
+          />
+        ) : (
+          <Tooltip text="Tab Spaces" />
+        )}
       </IconWrapper>
       <IconWrapper onClick={() => setFullScreen(prev => !prev)}>
         <FontAwesomeIcon

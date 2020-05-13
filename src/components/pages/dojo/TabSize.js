@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import styled, { css } from "styled-components";
 import { useDojoContext } from "../../../contexts/DojoContext";
 
@@ -42,11 +42,11 @@ const Size = styled.div`
         `}
 `;
 
-const TabSize = () => {
+const TabSize = ({ handleClose }, tabSizeRef) => {
   const { tabSize, setTabSize } = useDojoContext();
 
   return (
-    <Container>
+    <Container ref={tabSizeRef}>
       Tab Spaces:
       {[2, 4, 8].map(size => (
         <Size
@@ -61,4 +61,4 @@ const TabSize = () => {
   );
 };
 
-export default TabSize;
+export default forwardRef(TabSize);
