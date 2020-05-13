@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCog,
   faExpand,
-  faCompressAlt,
+  faCompress,
   faUndo
 } from "@fortawesome/free-solid-svg-icons";
 import { useDojoContext } from "../../../contexts/DojoContext";
@@ -38,6 +38,9 @@ const IconWrapper = styled.div`
   }
 `;
 
+const iconColor = "gray";
+const iconSize = "lg";
+
 const Options = () => {
   const [showTabSize, setShowTabSize] = useState(false);
   const { fullScreen, setFullScreen, setDojo } = useDojoContext();
@@ -64,22 +67,19 @@ const Options = () => {
     return () => document.removeEventListener("mousedown", onMouseDown);
   }, [onMouseDown]);
 
-  const resetDojo = () =>
-    setDojo(prev => {
-      return { ...prev };
-    });
+  const resetDojo = () => setDojo(prev => ({ ...prev }));
 
   return (
     <Container margin={fullScreen ? "10px" : "0 0 20px 0"}>
       <IconWrapper onClick={resetDojo}>
-        <FontAwesomeIcon icon={faUndo} size={"lg"} color={"gray"} />
+        <FontAwesomeIcon icon={faUndo} size={iconSize} color={iconColor} />
         <Tooltip text="Reset Code" />
       </IconWrapper>
       <IconWrapper
         ref={tabSizeIconRef}
         onClick={() => setShowTabSize(prev => !prev)}
       >
-        <FontAwesomeIcon icon={faCog} size={"lg"} color={"gray"} />
+        <FontAwesomeIcon icon={faCog} size={iconSize} color={iconColor} />
         {showTabSize ? (
           <TabSize
             ref={tabSizeRef}
@@ -91,9 +91,9 @@ const Options = () => {
       </IconWrapper>
       <IconWrapper onClick={() => setFullScreen(prev => !prev)}>
         <FontAwesomeIcon
-          icon={fullScreen ? faCompressAlt : faExpand}
-          size={"lg"}
-          color={"gray"}
+          icon={fullScreen ? faCompress : faExpand}
+          size={iconSize}
+          color={iconColor}
         />
         <Tooltip text={`${fullScreen ? "Exit" : ""} Full Screen`} />
       </IconWrapper>

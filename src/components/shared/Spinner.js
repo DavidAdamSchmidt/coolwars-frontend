@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   display: inline-block;
   width: 80px;
   height: 80px;
-  color: black;
+  color: ${({ theme }) => theme.color};
 
   & div {
     transform-origin: 40px 40px;
@@ -30,7 +30,7 @@ const Wrapper = styled.div`
     border-radius: 20%;
     width: 6px;
     height: 18px;
-    background: black;
+    background: ${({ theme }) => theme.color};
   }
 
   & div:nth-child(1) {

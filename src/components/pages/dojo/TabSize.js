@@ -14,11 +14,12 @@ const Container = styled.div`
   width: 250px;
   height: auto;
   padding: 12px;
+  background: #393f4d;
   cursor: initial;
   line-height: 40px;
   font-weight: bold;
   text-align: center;
-  background: ${({ theme }) => theme.tabSizeBackground};
+  color: white;
 `;
 
 const Size = styled.div`
@@ -30,14 +31,12 @@ const Size = styled.div`
     selected
       ? css`
           background: darkgreen;
-          color: white;
           cursor: default;
         `
       : css`
           &:hover {
             background: limegreen;
             cursor: pointer;
-            color: white;
           }
         `}
 `;

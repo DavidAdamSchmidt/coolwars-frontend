@@ -6,17 +6,15 @@ const ThemeContext = createContext(null);
 export const useThemeContext = () => useContext(ThemeContext);
 
 const lightTheme = {
-  background: "white",
+  background: "whitesmoke",
   color: "#1d1e22",
-  footerBackground: "#202020",
-  tabSizeBackground: "#f3f3f3"
+  footerBackground: "#202020"
 };
 
 const darkTheme = {
   background: "#1d1e22",
   color: "white",
-  footerBackground: "black",
-  tabSizeBackground: "#313d4b"
+  footerBackground: "black"
 };
 
 const ThemeProvider = ({ children }) => {

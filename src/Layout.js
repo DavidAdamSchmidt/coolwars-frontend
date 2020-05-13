@@ -4,6 +4,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   body {
+    overflow: hidden;
     margin: 0;
     font-family: boxed, "helvetica neue", Helvetica, Roboto, Arial, sans-serif;
     background: ${({ theme }) => theme.background};

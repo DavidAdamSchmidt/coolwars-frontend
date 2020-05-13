@@ -9,7 +9,8 @@ const Container = styled.span`
   white-space: nowrap;
   border-radius: 4px;
   padding: 5px;
-  background: ${({ theme }) => theme.tabSizeBackground};
+  background: #393f4d;
+  color: white;
 
   ${({ fullScreen }) =>
     fullScreen

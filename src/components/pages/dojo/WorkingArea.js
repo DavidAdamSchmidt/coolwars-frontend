@@ -14,14 +14,14 @@ const ButtonWrapper = styled.div`
 `;
 
 const BottomWrapper = styled.div`
-  margin-top: 30px;
+  margin-top: ${({ marginTop }) => marginTop};
 `;
 
 const WorkingArea = () => {
   const [userCode, setUserCode] = useState("");
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { dojo } = useDojoContext();
+  const { dojo, fullScreen } = useDojoContext();
 
   useEffect(() => setUserCode(dojo.starterCode), [dojo]);
 
@@ -61,7 +61,7 @@ const WorkingArea = () => {
         handleCompile={handleCompile}
         handleChange={handleCodeChange}
       />
-      <BottomWrapper>
+      <BottomWrapper marginTop={`${fullScreen ? 34 : 60}px`}>
         {loading || result ? (
           <Output loading={loading} result={result} />
         ) : (
