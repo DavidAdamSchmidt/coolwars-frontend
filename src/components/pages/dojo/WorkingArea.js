@@ -10,10 +10,11 @@ const WorkingArea = () => {
   const [result, setResult] = useState(null);
   const { dojo } = useDojoContext();
 
-  const verifySolution = solution => {
+  const handleCompile = userCode => {
     Axios.post(`${API_URL}/verify`, {
       dojoId: dojo.id,
-      solution: solution
+      language: "PYTHON",
+      code: userCode
     })
       .then(response => {
         if (response.data === true || response.data === false) {
@@ -23,20 +24,6 @@ const WorkingArea = () => {
       .catch(error => {
         console.log(`Error: ${error}`);
       });
-  };
-
-  const handleCompile = userCode => {
-    let result;
-
-    try {
-      // eslint-disable-next-line no-eval
-      result = `${eval(userCode)}`;
-    } catch (e) {
-      result = `ERROR: ${e.message}`;
-    }
-
-    setResult({ code: result, valid: null });
-    verifySolution(result);
   };
 
   return (

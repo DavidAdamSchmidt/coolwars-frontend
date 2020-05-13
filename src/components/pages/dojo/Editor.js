@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AceEditor from "react-ace";
-import "ace-builds/src-noconflict/mode-javascript";
+import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-tomorrow";
 import "ace-builds/src-noconflict/theme-tomorrow_night_bright";
 import { useDojoContext } from "../../../contexts/DojoContext";
@@ -39,7 +39,7 @@ const Editor = ({ handleCompile }) => {
   return (
     <div>
       <AceEditor
-        mode="javascript"
+        mode="python"
         theme={isDarkMode ? "tomorrow_night_bright" : "tomorrow"}
         onChange={code => setUserCode(code)}
         value={userCode}
