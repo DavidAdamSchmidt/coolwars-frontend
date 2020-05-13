@@ -18,7 +18,7 @@ const initialStyle = {
   fontSize: 16
 };
 
-const Editor = ({ handleCompile }) => {
+const Editor = ({ handleCompile, freeze }) => {
   const [userCode, setUserCode] = useState("");
   const [style, setStyle] = useState(initialStyle);
   const { dojo, tabSize, fullScreen } = useDojoContext();
@@ -47,6 +47,7 @@ const Editor = ({ handleCompile }) => {
         editorProps={{ $blockScrolling: true }}
         style={style}
         tabSize={tabSize}
+        readOnly={freeze}
       />
       <ButtonWrapper>
         <button onClick={() => handleCompile(userCode)}>Compile</button>

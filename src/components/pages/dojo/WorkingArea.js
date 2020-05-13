@@ -34,7 +34,7 @@ const WorkingArea = () => {
   return (
     <div>
       <Options />
-      <Editor handleCompile={handleCompile} />
+      <Editor handleCompile={handleCompile} freeze={loading} />
       {loading && <Spinner />}
       {result && <Result result={result} />}
     </div>
