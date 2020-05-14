@@ -7,10 +7,11 @@ const Message = styled.textarea`
   box-sizing: border-box;
   width: 100%;
   max-width: 500px;
-  height: 50px;
+  height: 100px;
   padding: 6px;
   resize: none;
   outline: none;
+  font-weight: bold;
   color: ${({ color }) => color};
 `;
 

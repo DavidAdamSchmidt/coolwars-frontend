@@ -4,7 +4,7 @@ import Spinner from "../../shared/Spinner";
 
 const Output = ({ loading, result }) => {
   if (loading) {
-    return <Spinner marginTop={"-14px"} />;
+    return <Spinner />;
   }
 
   return result ? <Result result={result} /> : null;

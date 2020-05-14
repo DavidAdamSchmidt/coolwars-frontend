@@ -13,6 +13,12 @@ const ButtonWrapper = styled.div`
   padding: 10px;
 `;
 
+const Button = styled.button`
+  padding: 4px 8px;
+  cursor: pointer;
+  letter-spacing: 0.7px;
+`;
+
 const BottomWrapper = styled.div`
   margin-top: ${({ marginTop }) => marginTop};
 `;
@@ -66,7 +72,7 @@ const WorkingArea = () => {
           <Output loading={loading} result={result} />
         ) : (
           <ButtonWrapper>
-            <button onClick={() => handleCompile(userCode)}>Compile</button>
+            <Button onClick={() => handleCompile(userCode)}>Compile</Button>
           </ButtonWrapper>
         )}
       </BottomWrapper>

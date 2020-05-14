@@ -15,7 +15,7 @@ const initialStyle = {
 
 const toFullHeight = style => ({
   ...style,
-  height: `${window.innerHeight - 230}px`
+  height: `${window.innerHeight - 280}px`
 });
 
 const Editor = ({ userCode, freeze, handleChange }) => {
