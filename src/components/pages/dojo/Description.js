@@ -6,7 +6,15 @@ import { QUERIES } from "../../../constants";
 const Wrapper = styled.div`
   margin-bottom: 40px;
   padding-right: 40px;
-  line-height: 1.6;
+  line-height: 1.8;
+
+  & code {
+    border-radius: 4px;
+    padding: 2px 4px;
+    font-size: 16px;
+    background: black;
+    color: white;
+  }
 
   @media (${QUERIES.MEDIUM}) {
     margin-bottom: 0;
@@ -26,7 +34,7 @@ const Description = () => {
   return fullScreen ? null : (
     <Wrapper>
       <Title>{title}</Title>
-      <span>{description}</span>
+      <div dangerouslySetInnerHTML={{ __html: description }} />
     </Wrapper>
   );
 };

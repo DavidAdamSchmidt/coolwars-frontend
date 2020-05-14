@@ -26,6 +26,7 @@ const Selector = ({ dojos, handleSelect }) => {
         onChange={o => handleSelect(o.value)}
         placeholder="Select a dojo..."
         noOptionsMessage={() => "No dojo available"}
+        maxMenuHeight={110}
         isSearchable
       />
     </Wrapper>

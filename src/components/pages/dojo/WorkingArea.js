@@ -41,8 +41,8 @@ const WorkingArea = () => {
       code: userCode
     })
       .then(response => {
-        if (response.data === true || response.data === false) {
-          setResult({ ...result, valid: response.data });
+        if (response.data) {
+          setResult(response.data);
         }
         setLoading(false);
       })

@@ -19,7 +19,9 @@ const Result = ({ result }) => {
 
   return (
     <Message
-      value={`${result?.valid ? "Valid" : "Invalid"} solution: ${result.code}`}
+      value={`${result?.valid ? "Valid" : "Invalid"} solution: ${
+        result.output
+      }`}
       readOnly
       color={color}
     />
