@@ -8,13 +8,18 @@ import {
   faUndo
 } from "@fortawesome/free-solid-svg-icons";
 import { useDojoContext } from "../../../contexts/DojoContext";
+import Language from "./Language";
 import TabSize from "./TabSize";
 import Tooltip from "./Tooltip";
 
 const Container = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin: ${({ margin }) => margin};
+`;
+
+const RightPanel = styled.span`
+  display: flex;
 `;
 
 const IconWrapper = styled.div`
@@ -71,32 +76,35 @@ const Options = () => {
 
   return (
     <Container margin={fullScreen ? "10px" : "0 0 20px 0"}>
-      <IconWrapper onClick={resetDojo}>
-        <FontAwesomeIcon icon={faUndo} size={iconSize} color={iconColor} />
-        <Tooltip text="Reset Code" />
-      </IconWrapper>
-      <IconWrapper
-        ref={tabSizeIconRef}
-        onClick={() => setShowTabSize(prev => !prev)}
-      >
-        <FontAwesomeIcon icon={faCog} size={iconSize} color={iconColor} />
-        {showTabSize ? (
-          <TabSize
-            ref={tabSizeRef}
-            handleClose={() => setShowTabSize(prev => !prev)}
+      <Language />
+      <RightPanel>
+        <IconWrapper onClick={resetDojo}>
+          <FontAwesomeIcon icon={faUndo} size={iconSize} color={iconColor} />
+          <Tooltip text="Reset Code" />
+        </IconWrapper>
+        <IconWrapper
+          ref={tabSizeIconRef}
+          onClick={() => setShowTabSize(prev => !prev)}
+        >
+          <FontAwesomeIcon icon={faCog} size={iconSize} color={iconColor} />
+          {showTabSize ? (
+            <TabSize
+              ref={tabSizeRef}
+              handleClose={() => setShowTabSize(prev => !prev)}
+            />
+          ) : (
+            <Tooltip text="Tab Spaces" />
+          )}
+        </IconWrapper>
+        <IconWrapper onClick={() => setFullScreen(prev => !prev)}>
+          <FontAwesomeIcon
+            icon={fullScreen ? faCompress : faExpand}
+            size={iconSize}
+            color={iconColor}
           />
-        ) : (
-          <Tooltip text="Tab Spaces" />
-        )}
-      </IconWrapper>
-      <IconWrapper onClick={() => setFullScreen(prev => !prev)}>
-        <FontAwesomeIcon
-          icon={fullScreen ? faCompress : faExpand}
-          size={iconSize}
-          color={iconColor}
-        />
-        <Tooltip text={`${fullScreen ? "Exit" : ""} Full Screen`} />
-      </IconWrapper>
+          <Tooltip text={`${fullScreen ? "Exit" : ""} Full Screen`} />
+        </IconWrapper>
+      </RightPanel>
     </Container>
   );
 };

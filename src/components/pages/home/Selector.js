@@ -10,9 +10,7 @@ const Wrapper = styled.div`
 `;
 
 const createOptions = dojos =>
-  dojos.map(d => {
-    return { value: d.id, label: d.title };
-  });
+  dojos.slice(0, dojos.length / 2).map(d => ({ value: d.id, label: d.title }));
 
 const Selector = ({ dojos, handleSelect }) => {
   const [options, setOptions] = useState(createOptions(dojos));

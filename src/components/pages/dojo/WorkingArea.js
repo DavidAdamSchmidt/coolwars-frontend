@@ -37,7 +37,7 @@ const WorkingArea = () => {
     setLoading(true);
     Axios.post(`${API_URL}/verify`, {
       dojoId: dojo.id,
-      language: "PYTHON",
+      language: dojo.language,
       code: userCode
     })
       .then(response => {
