@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/mode-python";
@@ -20,6 +20,7 @@ const toFullHeight = style => ({
 
 const Editor = ({ userCode, freeze, handleChange }) => {
   const [style, setStyle] = useState(toFullHeight(initialStyle));
+  const editorRef = useRef(null);
   const { dojo, tabSize, fullScreen } = useDojoContext();
   const { isDarkMode } = useThemeContext();
 
@@ -30,8 +31,11 @@ const Editor = ({ userCode, freeze, handleChange }) => {
     [fullScreen]
   );
 
+  useEffect(() => editorRef.current.editor.resize(), [style]);
+
   return (
     <AceEditor
+      ref={editorRef}
       mode={dojo.language.toLowerCase()}
       theme={isDarkMode ? "tomorrow_night_bright" : "crimson_editor"}
       onChange={handleChange}
