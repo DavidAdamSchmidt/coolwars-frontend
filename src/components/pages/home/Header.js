@@ -6,6 +6,7 @@ const Container = styled.div`
   position: relative;
   width: 100%;
   height: 50vh;
+  max-height: calc(100vh - 380px);
   background: linear-gradient(
       to right bottom,
       rgba(43, 43, 133, 0.8),
