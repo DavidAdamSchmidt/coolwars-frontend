@@ -13,21 +13,22 @@ const initialStyle = {
   fontSize: 16
 };
 
-const toFullHeight = style => ({
-  ...style,
-  height: `${window.innerHeight - 280}px`
-});
-
 const Editor = ({ userCode, freeze, handleChange }) => {
-  const [style, setStyle] = useState(toFullHeight(initialStyle));
+  const [style, setStyle] = useState(initialStyle);
   const editorRef = useRef(null);
   const { dojo, tabSize, fullScreen } = useDojoContext();
   const { isDarkMode } = useThemeContext();
 
-  useEffect(() => setStyle(initialStyle), []);
-
   useEffect(
-    () => setStyle(prev => (fullScreen ? toFullHeight(prev) : initialStyle)),
+    () =>
+      setStyle(prev =>
+        fullScreen
+          ? {
+              ...prev,
+              height: `${window.innerHeight - 280}px`
+            }
+          : initialStyle
+      ),
     [fullScreen]
   );
 
